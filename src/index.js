@@ -8,15 +8,16 @@ require('./models/index');
 
 const app = express();
 const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`Server startetd on PORT ${PORT}`));
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
 app.use(express.json());
 app.use('/api', router);
 app.use(errorMiddleware);
+
+app.listen(PORT, () => console.log(`Server startetd on PORT ${PORT}`));
 
 const connecting = async () => {
     try {
